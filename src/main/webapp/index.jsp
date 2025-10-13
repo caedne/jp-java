@@ -11,11 +11,19 @@
           crossorigin="anonymous">
 </head>
 <body>
-<div>
-<h1>Agenda de Contatos</h1>
+<div class="container">
+<h1 class="text-center text-primary mt-4">Agenda Pessoal Completa</h1>
 <hr>	
-<a href="cadastro.jsp">Cadastrar</a>
-<a href="consulta.jsp">Consultar</a>
+
+<h2 class="mt-4">Gestão de Contatos</h2>
+<a href="cadastro.jsp" class="btn btn-outline-primary m-1">Cadastrar Contato</a>
+<a href="consulta.jsp" class="btn btn-outline-primary m-1">Consultar Contatos</a>
+
+<h2 class="mt-4">Gestão de Compromissos</h2>
+<a href="cadastro_compromisso.jsp" class="btn btn-outline-success m-1">Cadastrar Compromisso</a>
+<a href="CompromissoServlet" class="btn btn-outline-success m-1">Consultar Compromissos</a>
+
+<hr>
 </div>
 </body>
 </html>

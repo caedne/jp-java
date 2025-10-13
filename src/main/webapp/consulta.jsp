@@ -13,13 +13,16 @@
 	crossorigin="anonymous">
 </head>
 <body>
-	<table class="table table-striped container">
+	<div class="container">
+	<table class="table table-striped">
+	<thead>
 		<tr>
 			<th>Nome</th>
 			<th>Email</th>
 			<th>Editar</th>
 			<th>Excluir</th>
 		<tr>
+		<thead>
 		<tbody>
 			<%
 			if (request.getAttribute("contatos") == null) {
@@ -38,5 +41,7 @@
 
 	<hr />
 	<a href="index.jsp">Home</a>
+		
+	</div>
 </body>
 </html>
