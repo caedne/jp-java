@@ -54,7 +54,7 @@ public class CompromissoServlet extends HttpServlet {
 			throws ServletException, IOException {
 		String acao = request.getParameter("acao");
 		
-		if (acao != null && acao.equals("alterar")) { // Salvar alterações de um compromisso existente
+		if (acao != null && acao.equals("alterar")) { 
 			Compromisso compromisso = getById(Integer.parseInt(request.getParameter("id")));
 			
 			

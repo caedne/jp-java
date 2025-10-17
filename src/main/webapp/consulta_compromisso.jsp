@@ -24,7 +24,9 @@
             <th>Local</th>
             <th>Contato</th>
             <th>Status</th>
-            <th>Editar</th>   <th>Excluir</th>  </tr>
+            <th>Editar</th>   
+            <th>Excluir</th> 
+             </tr>
 	</thead>
 		<tbody>
 			<%
