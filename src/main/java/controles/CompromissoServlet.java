@@ -24,13 +24,13 @@ public class CompromissoServlet extends HttpServlet {
 		
 		if (acao != null) {
 			String idCompromisso = request.getParameter("id");
-			// Verifica se o ID é válido antes de buscar o compromisso
+	
 			if (idCompromisso != null && !idCompromisso.isEmpty()) {
 			    Compromisso cp = getById(Integer.parseInt(idCompromisso));
 			    
 			    if(acao.equals("editar")) {
 			    	request.setAttribute("compromisso", cp);
-			    	// Envia para a nova página de edição
+			    
 			    	RequestDispatcher rd = request.getRequestDispatcher("edicao_compromisso.jsp"); 
 			    	rd.forward(request, response);				
 			    } else if (acao.equals("excluir")) {
@@ -38,12 +38,12 @@ public class CompromissoServlet extends HttpServlet {
 			    	response.sendRedirect("CompromissoServlet");				
 			    }
 			} else {
-			    // Se a ação for passada sem ID (não deveria acontecer, mas para segurança)
+			   
 			    response.sendRedirect("CompromissoServlet");
 			}
 						
 		} else {
-			// Ação padrão (consulta)
+		
 			request.setAttribute("compromissos", compromissos);
 			RequestDispatcher rd = request.getRequestDispatcher("consulta_compromisso.jsp");
 			rd.forward(request, response);
@@ -57,7 +57,7 @@ public class CompromissoServlet extends HttpServlet {
 		if (acao != null && acao.equals("alterar")) { // Salvar alterações de um compromisso existente
 			Compromisso compromisso = getById(Integer.parseInt(request.getParameter("id")));
 			
-			// Atualiza todos os campos
+			
 			compromisso.setDescricao(request.getParameter("descricao"));
 			compromisso.setData(request.getParameter("data"));
 			compromisso.setHora(request.getParameter("hora"));
@@ -65,7 +65,7 @@ public class CompromissoServlet extends HttpServlet {
 			compromisso.setContato(request.getParameter("contato"));
 			compromisso.setStatus(request.getParameter("status"));
 			
-		} else { // Novo Cadastro (ação é null)
+		} else { 
 			Compromisso compromisso = new Compromisso();
 			compromisso.setId(compromissos.size() + 1);
 			compromisso.setDescricao(request.getParameter("descricao"));

@@ -48,16 +48,16 @@
 					           "<td>"+cp.getContato()+"</td>"+
 					           "<td>"+cp.getStatus()+"</td>"+
                                
-                               // BOTÃO EDITAR (AZUL CLARO - btn-info)
+                           
 					           "<td><a href='CompromissoServlet?acao=editar&id="+cp.getId()+"' class='btn btn-sm btn-info'>Editar</a></td>"+
                                
-                               // BOTÃO EXCLUIR (VERMELHO - btn-danger)
+                             
 					           "<td><a href='CompromissoServlet?acao=excluir&id="+cp.getId()+"' class='btn btn-sm btn-danger' onclick='return confirm(\"Deseja excluir: " + cp.getDescricao() + "?\");'>Excluir</a></td>"+
                                
 					           "</tr>");
 				}
 			} else {
-			    // O colspan agora é 8 para cobrir todas as colunas
+			   
 			    out.print("<tr><td colspan='8' class='text-center'>Nenhum compromisso encontrado.</td></tr>");
 			}
 			%>
