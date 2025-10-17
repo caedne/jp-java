@@ -18,8 +18,14 @@
 			<label class="form-label">Informe Nome</label>
 			<input class="form-control" type="text" placeholder="Ex: Carlos" name="nome" required="required"> 
 			
+			<label class="form-label mt-2">Informe Telefone</label>
+			<input class="form-control" type="tel" placeholder="Ex: 47 99665 4383" name="telefone" required="required"> 	
+			
 			<label class="form-label mt-2">Informe Email</label>
-			<input class="form-control" type="email" placeholder="Ex: carlos@gmail.com" name="email" required="required"> 	
+			<input class="form-control" type="email" placeholder="Ex: carlos@gmail.com" name="email" required="required"> 
+			
+			<label class="form-label mt-2">Informe Empresa</label>
+			<input class="form-control" type="text" name="empresa" required="required"> 		
 			
 			<button class="btn btn-primary mt-3 w-100">Salvar Contato</button>
 		</form>

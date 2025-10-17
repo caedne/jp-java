@@ -19,7 +19,9 @@
 	<thead>
 		<tr class="table-primary">
 			<th>Nome</th>
+			<th>Telefone</th>
 			<th>Email</th>
+			<th>Empresa</th>
 			<th>Editar</th>
 			<th>Excluir</th>
 		</tr>
@@ -33,17 +35,23 @@
 			List<Contato> contatos = (List<Contato>) request.getAttribute("contatos");
 			if (contatos != null) {
 			    for (Contato ct : contatos) {
-				    out.print("<tr><td>"+ct.getNome()+"</td><td>"+ct.getEmail()+"</td>"+
+				    // ESTRUTURA CORRIGIDA: Uma linha (<tr>) e 6 células (<td>)
+				    out.print("<tr>" +
+				               "<td>"+ct.getNome()+"</td>" + // Célula 1: Nome
+				               "<td>"+ct.getTelefone()+"</td>" + // Célula 2: Telefone
+				               "<td>"+ct.getEmail()+"</td>" + // Célula 3: Email
+				               "<td>"+ct.getEmpresa()+"</td>" + // Célula 4: Empresa
 	        			   
-	        			   // BOTÃO EDITAR (AZUL CLARO - btn-info)
-	        			   "<td><a href='ContatoServlet?acao=editar&id="+ct.getId()+"' class='btn btn-sm btn-info'>Editar</a></td>"+
+	        			   // Célula 5: Botão Editar
+	        			   "<td><a href='ContatoServlet?acao=editar&id="+ct.getId()+"' class='btn btn-sm btn-info'>Editar</a></td>" +
 				           
-	        			   // BOTÃO EXCLUIR (VERMELHO - btn-danger)
-	        			   "<td><a href='ContatoServlet?acao=excluir&id="+ct.getId()+"' class='btn btn-sm btn-danger' onclick='return confirm(\"Deseja excluir o contato: " + ct.getNome() + "?\");'>Excluir</a></td>"+
+	        			   // Célula 6: Botão Excluir
+	        			   "<td><a href='ContatoServlet?acao=excluir&id="+ct.getId()+"' class='btn btn-sm btn-danger' onclick='return confirm(\"Deseja excluir o contato: " + ct.getNome() + "?\");'>Excluir</a></td>" +
 				           "</tr>");
 			    }
 			} else {
-			     out.print("<tr><td colspan='4' class='text-center'>Nenhum contato encontrado.</td></tr>");
+			     // Colspan ajustado para 6 colunas
+			     out.print("<tr><td colspan='6' class='text-center'>Nenhum contato encontrado.</td></tr>");
 			}
 			%>
 		</tbody>

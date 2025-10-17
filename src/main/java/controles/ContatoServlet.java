@@ -50,12 +50,16 @@ public class ContatoServlet extends HttpServlet {
 		if (acao != null) {
 			Contato contato = getById(Integer.parseInt(request.getParameter("id")));
 			contato.setNome(request.getParameter("nome"));
+			contato.setTelefone(request.getParameter("telefone"));
 			contato.setEmail(request.getParameter("email"));
+			contato.setEmpresa(request.getParameter("empresa"));
 		} else {
 			Contato contato = new Contato();
 			contato.setId(contatos.size() + 1);
 			contato.setNome(request.getParameter("nome"));
+			contato.setTelefone(request.getParameter("telefone"));
 			contato.setEmail(request.getParameter("email"));
+			contato.setEmpresa(request.getParameter("empresa"));
 			contatos.add(contato);
 		}
 		response.sendRedirect("ContatoServlet");

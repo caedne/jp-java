@@ -26,10 +26,20 @@
 				value="<%out.print(ct.getNome());%>" placeholder="Ex: Carlos"
 				name="nome" required="required" /> 
 				
+				<label class="form-label">Informe Telefone</label>
+		    	 <input class="form-control" type="tel"
+				value="<%out.print(ct.getTelefone());%>" placeholder="Ex: 47 99665 4383"
+				name="telefone" required="required" /> 
+				
 				<label class="form-label mt-2">Informe Email</label> 
 				<input class="form-control" type="email"
 				value="<%out.print(ct.getEmail());%>"
 				placeholder="Ex: carlos@gmail.com" name="email" required="required" />
+				
+				<label class="form-label mt-2">Informe Empresa</label> 
+				<input class="form-control" type="text"
+				value="<%out.print(ct.getEmpresa());%>"
+				name="empresa" required="required" />
 
 			<button class="btn btn-success mt-3 me-2">Salvar Alterações</button>
 			
