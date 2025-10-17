@@ -17,24 +17,32 @@
 	%>
 
 	<div class="container">
-		<h2 class="text-center m-4">Editar Contato</h2>
+		<h2 class="text-center m-4 text-warning">Editar Contato</h2>
 		<form action="ContatoServlet?acao=alterar" method="post" >
 		<input type="hidden" name="id"	value="<%out.print(ct.getId());%>" />
 				
-				<label>Informe Nome</label>
+				<label class="form-label">Informe Nome</label>
 		    	 <input class="form-control" type="text"
 				value="<%out.print(ct.getNome());%>" placeholder="Ex: Carlos"
 				name="nome" required="required" /> 
-				<label>Informe Email</label> 
+				
+				<label class="form-label mt-2">Informe Email</label> 
 				<input class="form-control" type="email"
 				value="<%out.print(ct.getEmail());%>"
 				placeholder="Ex: carlos@gmail.com" name="email" required="required" />
 
-			<button class="btn btn-primary mt-3">Salvar</button>
+			<button class="btn btn-success mt-3 me-2">Salvar Alterações</button>
+			
+			<a href='ContatoServlet?acao=excluir&id=<%out.print(ct.getId());%>' 
+			   class='btn btn-danger mt-3' 
+			   onclick='return confirm("Tem certeza que deseja excluir o contato: " + "<%out.print(ct.getNome());%>" + "?");'>
+			   Excluir Contato
+			</a>
+			
 		</form>
 		
 		<hr>
-		<a href="index.jsp">Home</a>
+		<a href="ContatoServlet" class="btn btn-secondary mt-2">Voltar para a Lista</a>
 	</div>
 
 </body>

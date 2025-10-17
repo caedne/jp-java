@@ -17,15 +17,15 @@
 	<h2 class="text-center m-4 text-primary">Compromissos Agendados</h2>
 	<table class="table table-striped table-hover">
 	<thead>
-		<tr class="table-primary">
-			<th>Descrição</th>
-			<th>Data</th>
-			<th>Hora</th>
-			<th>Local</th>
-			<th>Contato</th>
-			<th>Status</th>
-		<tr>
-		<thead>
+		<tr class="table-success">
+            <th>Descrição</th>
+            <th>Data</th>
+            <th>Hora</th>
+            <th>Local</th>
+            <th>Contato</th>
+            <th>Status</th>
+            <th>Editar</th>   <th>Excluir</th>  </tr>
+	</thead>
 		<tbody>
 			<%
 			List<Compromisso> compromissos = (List<Compromisso>) request.getAttribute("compromissos");
@@ -47,10 +47,18 @@
 					           "<td>"+cp.getLocal()+"</td>"+
 					           "<td>"+cp.getContato()+"</td>"+
 					           "<td>"+cp.getStatus()+"</td>"+
+                               
+                               // BOTÃO EDITAR (AZUL CLARO - btn-info)
+					           "<td><a href='CompromissoServlet?acao=editar&id="+cp.getId()+"' class='btn btn-sm btn-info'>Editar</a></td>"+
+                               
+                               // BOTÃO EXCLUIR (VERMELHO - btn-danger)
+					           "<td><a href='CompromissoServlet?acao=excluir&id="+cp.getId()+"' class='btn btn-sm btn-danger' onclick='return confirm(\"Deseja excluir: " + cp.getDescricao() + "?\");'>Excluir</a></td>"+
+                               
 					           "</tr>");
 				}
 			} else {
-			    out.print("<tr><td colspan='6' class='text-center'>Nenhum compromisso encontrado.</td></tr>");
+			    // O colspan agora é 8 para cobrir todas as colunas
+			    out.print("<tr><td colspan='8' class='text-center'>Nenhum compromisso encontrado.</td></tr>");
 			}
 			%>
 		</tbody>

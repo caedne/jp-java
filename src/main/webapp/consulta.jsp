@@ -14,15 +14,16 @@
 </head>
 <body>
 	<div class="container">
-	<table class="table table-striped">
+	<h2 class="text-center m-4 text-primary">Contatos Cadastrados</h2>
+	<table class="table table-striped table-hover">
 	<thead>
-		<tr>
+		<tr class="table-primary">
 			<th>Nome</th>
 			<th>Email</th>
 			<th>Editar</th>
 			<th>Excluir</th>
-		<tr>
-		<thead>
+		</tr>
+	</thead>
 		<tbody>
 			<%
 			if (request.getAttribute("contatos") == null) {
@@ -30,17 +31,28 @@
 				return;
 			}
 			List<Contato> contatos = (List<Contato>) request.getAttribute("contatos");
-			for (Contato ct : contatos) {
-				out.print("<tr><td>"+ct.getNome()+"</td><td>"+ct.getEmail()+"</td>"+
-	        			   "<td><a href='ContatoServlet?acao=editar&id="+ct.getId()+"'>editar</a></td>"+
-				           "<td><a href='ContatoServlet?acao=excluir&id="+ct.getId()+"'>excluir</a></td>"+
-				           "</tr>");           }
+			if (contatos != null) {
+			    for (Contato ct : contatos) {
+				    out.print("<tr><td>"+ct.getNome()+"</td><td>"+ct.getEmail()+"</td>"+
+	        			   
+	        			   // BOTÃO EDITAR (AZUL CLARO - btn-info)
+	        			   "<td><a href='ContatoServlet?acao=editar&id="+ct.getId()+"' class='btn btn-sm btn-info'>Editar</a></td>"+
+				           
+	        			   // BOTÃO EXCLUIR (VERMELHO - btn-danger)
+	        			   "<td><a href='ContatoServlet?acao=excluir&id="+ct.getId()+"' class='btn btn-sm btn-danger' onclick='return confirm(\"Deseja excluir o contato: " + ct.getNome() + "?\");'>Excluir</a></td>"+
+				           "</tr>");
+			    }
+			} else {
+			     out.print("<tr><td colspan='4' class='text-center'>Nenhum contato encontrado.</td></tr>");
+			}
 			%>
 		</tbody>
 	</table>
 
+	<p class="text-end"><a href="cadastro.jsp" class="btn btn-primary">Novo Contato</a></p>
+
 	<hr />
-	<a href="index.jsp">Home</a>
+	<a href="index.jsp" class="btn btn-secondary">Voltar para Home</a>
 		
 	</div>
 </body>

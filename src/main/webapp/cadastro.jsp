@@ -12,20 +12,20 @@
 </head>
 <body>
 	<div class="container">
-	    <h2 class="text-center m-4">Novo Contato</h2>
+	    <h2 class="text-center m-4 text-primary">Novo Contato</h2>
 		<form action="ContatoServlet" method="post">
 			
-			<label>Informe Nome</label>
+			<label class="form-label">Informe Nome</label>
 			<input class="form-control" type="text" placeholder="Ex: Carlos" name="nome" required="required"> 
 			
-			<label>Informe Email</label>
+			<label class="form-label mt-2">Informe Email</label>
 			<input class="form-control" type="email" placeholder="Ex: carlos@gmail.com" name="email" required="required"> 	
 			
-			<button class="btn btn-primary mt-3">Salvar</button>
+			<button class="btn btn-primary mt-3 w-100">Salvar Contato</button>
 		</form>
 
 		<hr>
-		<a href="index.jsp">Home</a>
+		<a href="index.jsp" class="btn btn-secondary">Voltar para Home</a>
 
 	</div>
 
