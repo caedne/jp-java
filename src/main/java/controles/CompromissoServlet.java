@@ -50,37 +50,32 @@ public class CompromissoServlet extends HttpServlet {
 		}
 	}
 
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		String acao = request.getParameter("acao");
-		
-		if (acao != null && acao.equals("alterar")) { 
-			Compromisso compromisso = getById(Integer.parseInt(request.getParameter("id")));
-			
-			
-			compromisso.setDescricao(request.getParameter("descricao"));
-			compromisso.setData(request.getParameter("data"));
-			compromisso.setHora(request.getParameter("hora"));
-			compromisso.setLocal(request.getParameter("local"));
-			compromisso.setContato(request.getParameter("contato"));
-			compromisso.setStatus(request.getParameter("status"));
-			
-		} else { 
-			Compromisso compromisso = new Compromisso();
-			compromisso.setId(compromissos.size() + 1);
-			compromisso.setDescricao(request.getParameter("descricao"));
-			compromisso.setData(request.getParameter("data"));
-			compromisso.setHora(request.getParameter("hora"));
-			compromisso.setLocal(request.getParameter("local"));
-			compromisso.setContato(request.getParameter("contato"));
-			compromisso.setStatus(request.getParameter("status"));
-			
-			compromissos.add(compromisso);
+	// ... dentro de CompromissoServlet.java
+
+		protected void doPost(HttpServletRequest request, HttpServletResponse response)
+				throws ServletException, IOException {
+			String acao = request.getParameter("acao");
+
+			if (acao != null && acao.equals("alterar")) { // Edição
+				// ... Lógica de edição, onde o status vem do formulário
+				Compromisso compromisso = getById(Integer.parseInt(request.getParameter("id")));
+	            // ... (outros setters)
+				compromisso.setStatus(request.getParameter("status")); 
+
+			} else { // Novo Cadastro
+				Compromisso compromisso = new Compromisso();
+	            // ... Lógica de cadastro
+				
+				// Deve existir uma linha como esta:
+				compromisso.setStatus("Agendado"); // <--- ISSO DEVE ESTAR AQUI!
+				
+				// ...
+				compromissos.add(compromisso);
+			}
+
+			response.sendRedirect("CompromissoServlet");
 		}
-		
-		response.sendRedirect("CompromissoServlet");
-	}
-	
+
 	private Compromisso getById(int id) {
 		for (Compromisso cp : compromissos) {
 			if (cp.getId()==id) {
