@@ -9,23 +9,47 @@
 	      rel="stylesheet" 
           integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" 
           crossorigin="anonymous">
+          
+<style>
+	/* Um pequeno ajuste para deixar o corpo da página com um fundo suave */
+	body {
+		background-color: #f8f9fa;
+	}
+</style>
 </head>
 <body>
 <div class="container">
-<h1 class="text-center text-primary mt-4">Agenda Pessoal Completa</h1>
-<hr>	
+	<h1 class="text-center text-primary mt-5 mb-4">Agenda Pessoal Completa</h1>
 
-<h2 class="mt-4">Gestão de Contatos</h2>
-<a href="cadastro.jsp" class="btn btn-outline-primary m-1">Cadastrar Contato</a>
-<a href="consulta.jsp" class="btn btn-outline-primary m-1">Consultar Contatos</a>
+	<div class="row justify-content-center mt-5">
+		
+		<div class="col-lg-4 col-md-6 mb-4">
+			<div class="card shadow-sm h-100">
+				<div class="card-header text-center bg-white border-0 pt-3">
+					<h2 class="h5 mb-0 text-primary">Gestão de Contatos</h2>
+				</div>
+				<div class="card-body p-4 d-flex flex-column">
+					<div class="d-grid gap-3 mt-auto">
+						<a href="cadastro.jsp" class="btn btn-outline-primary">Cadastrar Contato</a>
+						<a href="ContatoServlet" class="btn btn-primary">Consultar Contatos</a>
+					</div>
+				</div>
+			</div>
+		</div>
 
-<h2 class="mt-4">Gestão de Compromissos</h2>
-<a href="cadastro_compromisso.jsp" class="btn btn-outline-success m-1">Cadastrar Compromisso</a>
-<a href="CompromissoServlet" class="btn btn-outline-success m-1">Consultar Compromissos</a>
-
-
-
-<hr>
-</div>
-</body>
+		<div class="col-lg-4 col-md-6 mb-4">
+			<div class="card shadow-sm h-100">
+				<div class="card-header text-center bg-white border-0 pt-3">
+					<h2 class="h5 mb-0 text-success">Gestão de Compromissos</h2>
+				</div>
+				<div class="card-body p-4 d-flex flex-column">
+					<div class="d-grid gap-3 mt-auto">
+						<a href="CompromissoServlet?acao=novo" class="btn btn-outline-success">Cadastrar Compromisso</a>
+						<a href="CompromissoServlet" class="btn btn-success">Consultar Compromissos</a>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div> </div> </body>
 </html>
