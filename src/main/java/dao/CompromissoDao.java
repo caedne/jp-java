@@ -12,12 +12,11 @@ import utils.ConectaDB;
 
 public class CompromissoDao {
 	
-	// REMOVIDO: private Connection con = ConectaDB.getConexao();
-
+	
 	public Compromisso salvar(Compromisso compromisso) {
 		String sql = "INSERT INTO tb_compromissos (descricao, data, hora, local, contato, status) VALUES (?, ?, ?, ?, ?, ?)";
 
-		// Pega e fecha a conexão automaticamente
+		
 		try (Connection con = ConectaDB.getConexao();
 			 PreparedStatement stm = con.prepareStatement(sql)) {
 			
@@ -39,7 +38,7 @@ public class CompromissoDao {
 		List<Compromisso> compromissos = new ArrayList<>();
 		String sql = "SELECT * FROM tb_compromissos";
 		
-		// Pega e fecha conexão, statement e resultset
+		
 		try (Connection con = ConectaDB.getConexao();
 			 PreparedStatement stm = con.prepareStatement(sql);
 			 ResultSet rs = stm.executeQuery()) {
@@ -71,7 +70,7 @@ public class CompromissoDao {
 			
 			stm.setInt(1, id);
 			
-			// O ResultSet também deve ser fechado
+			
 			try (ResultSet rs = stm.executeQuery()) {
 				if (rs.next()) {
 					Compromisso cp = new Compromisso();

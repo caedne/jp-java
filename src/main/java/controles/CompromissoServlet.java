@@ -29,17 +29,17 @@ public class CompromissoServlet extends HttpServlet {
         if (acao != null) {
             
             if (acao.equals("novo")) {
-                List<Contato> contatos = Collections.emptyList(); // Inicializa como lista vazia
+                List<Contato> contatos = Collections.emptyList();
                 try {
-                    // Tenta puxar a lista de contatos do DAO
+                    
                     contatos = contatoDao.getAll(); 
                 } catch (RuntimeException e) {
-                    // Se falhar, registra o erro no console (não congela o servidor)
+                  
                     System.err.println("Erro ao buscar contatos para novo compromisso: " + e.getMessage());
-                    // E continua com a lista vazia
+                    
                 }
                 
-                // CÓDIGO FINAL DE ENCAMINHAMENTO: Sempre carrega o JSP
+                
                 request.setAttribute("contatos", contatos);
                 RequestDispatcher rd = request.getRequestDispatcher("cadastro_compromisso.jsp");
                 rd.forward(request, response);
@@ -55,7 +55,7 @@ public class CompromissoServlet extends HttpServlet {
                 request.setAttribute("compromisso", cp);
               
                 try {
-                    // CÓDIGO CORRETO: Puxa a lista de contatos também para o modo edição
+                 
                     List<Contato> contatos = contatoDao.getAll(); 
                     request.setAttribute("contatos", contatos);
                 } catch (RuntimeException e) {
@@ -64,7 +64,7 @@ public class CompromissoServlet extends HttpServlet {
                 
                 RequestDispatcher rd = request.getRequestDispatcher("edicao_compromisso.jsp");
                 rd.forward(request, response);
-            } else { // Deletar
+            } else { 
                 try {
                     dao.deletar(cp);
                 } catch (RuntimeException e) {
@@ -73,7 +73,7 @@ public class CompromissoServlet extends HttpServlet {
                 response.sendRedirect("CompromissoServlet");
             }
 
-        } else { // Consulta Geral de Compromissos
+        } else { 
             try {
                 List<Compromisso> compromissos = dao.getAll();
                 request.setAttribute("compromissos", compromissos);
@@ -91,39 +91,74 @@ public class CompromissoServlet extends HttpServlet {
 
 		CompromissoDao dao = new CompromissoDao();
 		String acao = request.getParameter("acao");
+		
+	
+		Compromisso compromisso = null;
+		String jspParaEncaminhar = ""; 
+		boolean eraEdicao = (acao != null && acao.equals("alterar"));
 
 		try {
-			if (acao != null && acao.equals("alterar")) { 
+			if (eraEdicao) { 
 				
-				Compromisso compromisso = dao.getById(Integer.parseInt(request.getParameter("id")));
-				
-				
-				compromisso.setDescricao(request.getParameter("descricao"));
-				compromisso.setData(request.getParameter("data"));
-				compromisso.setHora(request.getParameter("hora"));
-				compromisso.setLocal(request.getParameter("local"));
-				compromisso.setContato(request.getParameter("contato"));
-				compromisso.setStatus(request.getParameter("status"));
-				
-				dao.alterar(compromisso); 
-				
+				compromisso = dao.getById(Integer.parseInt(request.getParameter("id")));
+				jspParaEncaminhar = "edicao_compromisso.jsp"; 
 			} else { 
-				Compromisso compromisso = new Compromisso();
-				compromisso.setDescricao(request.getParameter("descricao"));
-				compromisso.setData(request.getParameter("data"));
-				compromisso.setHora(request.getParameter("hora"));
-				compromisso.setLocal(request.getParameter("local"));
-				compromisso.setContato(request.getParameter("contato"));
 				
+				compromisso = new Compromisso();
 				compromisso.setStatus("Agendado"); 
-				
+				jspParaEncaminhar = "cadastro_compromisso.jsp"; 
+			}
+			
+			
+			compromisso.setDescricao(request.getParameter("descricao"));
+			compromisso.setData(request.getParameter("data"));
+			compromisso.setHora(request.getParameter("hora"));
+			compromisso.setLocal(request.getParameter("local"));
+			compromisso.setContato(request.getParameter("contato"));
+			if (eraEdicao) {
+				compromisso.setStatus(request.getParameter("status"));
+			}
+
+			
+			if (eraEdicao) {
+				dao.alterar(compromisso); 
+			} else { 
 				dao.salvar(compromisso);
 			}
+			
+			
+			response.sendRedirect("CompromissoServlet");
+
 		} catch (RuntimeException e) {
+			
+			
 			System.err.println("Erro no doPost do CompromissoServlet: " + e.getMessage());
+			
+			
+			if (e.getMessage().contains("Data truncation") && e.getMessage().contains("descricao")) {
+				
+				
+				request.setAttribute("erroDescricao", "O texto da descrição é muito longo! Por favor, resuma.");
+				
+				
+				request.setAttribute("compromissoComErro", compromisso); 
+				
+				
+				try {
+					ContatoDao contatoDao = new ContatoDao();
+					request.setAttribute("contatos", contatoDao.getAll());
+				} catch (RuntimeException e2) {
+					System.err.println("Erro aninhado ao buscar contatos após falha: " + e2.getMessage());
+				}
+
+				
+				RequestDispatcher rd = request.getRequestDispatcher(jspParaEncaminhar);
+				rd.forward(request, response);
+				
+			} else {
+				
+				throw new ServletException("Falha ao salvar/alterar. Erro inesperado: " + e.getMessage(), e);
+			}
 		}
-
-		response.sendRedirect("CompromissoServlet");
 	}
-
 }
